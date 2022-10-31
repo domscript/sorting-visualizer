@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Leaf</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="math.js"></script>
+    <script defer src="column.js"></script>
+    <script defer src="sort.js"></script>
+  </head>
+  <body>
+    <h1>Sorting Visualizator</h1>
+    <section class="grid-layout">
+      <canvas id="myCanvas" height="1000" width="1000"></canvas>
+      <section class="myButtons">
+        <button class="btn" type="button" onClick="playBubble()">
+          Bubble Sort
+        </button>
+        <button class="btn" type="button" onClick="playBubbleBack()">
+          Bubble Sort Back
+        </button>
+        <button class="btn" type="button" onClick="playSelection()">
+          Selection Sort
+        </button>
+        <button class="btn" type="button" onClick="playSelectionBack()">
+          Selection Sort Back
+        </button>
+        <button class="btn" type="button" onClick="playInsertion()">
+          Insertion Sort
+        </button>
+      </section>
+
+      <section class="myRange">
+        <ul>
+          <li>
+            <label for="speed">Speed</label><br />
+            <input
+              type="range"
+              name="speed"
+              id="speed"
+              value="3"
+              min="1"
+              max="5"
+              onChange="setSpeed()"
+            />
+          </li>
+          <li>
+            <label for="amount">Amount</label><br />
+            <input
+              type="range"
+              name="amount"
+              id="amount"
+              value="15"
+              min="3"
+              max="100"
+              onChange="setAmount()"
+            />
+          </li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</html>
