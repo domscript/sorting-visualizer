@@ -1,3 +1,12 @@
+import { Column } from "./column.js";
+import { bubbleSort } from "./algorithms/bubbleSort.js";
+import { bubbleSortBack } from "./algorithms/bubbleSortBack.js";
+import { selectionSort } from "./algorithms/selectionSort.js";
+import { selectionSortBack } from "./algorithms/selectionSortBack.js";
+import { insertionSort } from "./algorithms/insertionSort.js";
+
+const myButtons = document.getElementsByClassName("myButtons")[0];
+
 myCanvas.width = 800;
 myCanvas.height = Math.min(myCanvas.width * 0.6, window.outerHeight * 0.9);
 const context = myCanvas.getContext("2d");
@@ -31,254 +40,55 @@ function init() {
   }
 }
 
+myButtons.addEventListener("click", (e) => {
+  switch (e.target.dataset.sort) {
+    case "bubble":
+      bubble();
+      break;
+    case "bubbleBack":
+      bubbleBack();
+      break;
+    case "selection":
+      selection();
+      break;
+    case "selectionBack":
+      selectionBack();
+      break;
+    case "insertion":
+      insertion();
+      break;
+  }
+});
+
 function setAmount() {
   return document.getElementById("amount").value;
 }
 function setSpeed() {
   return document.getElementById("speed").value;
 }
-function playBubble() {
+
+function bubble() {
   init();
   moves = bubbleSort(array);
 }
-function playInsertion() {
-  init();
-  moves = insertionSort(array);
-}
-function playBubbleBack() {
+function bubbleBack() {
   init();
   moves = bubbleSortBack(array);
 }
-function playSelection() {
+function insertion() {
+  init();
+  moves = insertionSort(array);
+}
+function selection() {
   init();
   moves = selectionSort(array);
 }
-function playSelectionBack() {
+function selectionBack() {
   init();
   moves = selectionSortBack(array);
 }
 
 animate();
-
-function bubbleSort(array) {
-  const moves = [];
-  do {
-    var swapped = false;
-    for (let i = 1; i < array.length; i++) {
-      if (array[i - 1] > array[i]) {
-        swapped = true;
-        [array[i - 1], array[i]] = [array[i], array[i - 1]];
-        moves.push({
-          indices: [i - 1, i],
-          swap: true,
-        });
-      } else {
-        moves.push({
-          indices: [i - 1, i],
-          swap: false,
-        });
-      }
-    }
-  } while (swapped);
-  return moves;
-}
-
-function bubbleSortBack(array) {
-  const moves = [];
-  do {
-    var swapped = false;
-    for (let i = array.length - 1; i >= 0; i--) {
-      if (array[i - 1] > array[i]) {
-        swapped = true;
-        [array[i - 1], array[i]] = [array[i], array[i - 1]];
-        moves.push({
-          indices: [i - 1, i],
-          swap: true,
-        });
-      } else {
-        moves.push({
-          indices: [i - 1, i],
-          swap: false,
-        });
-      }
-    }
-  } while (swapped);
-  return moves;
-}
-
-function insertionSort(array) {
-  const moves = [];
-  for (let i = 1; i < array.length; i++) {
-    let [key, j] = [array[i], i - 1];
-
-    while (j >= 0 && array[j] > key) {
-      const tempArr = [...array];
-      array[j] = array[j + 1];
-      array[j + 1] = tempArr[j];
-      moves.push({
-        indices: [j, j + 1],
-        swap: true,
-      });
-      j--;
-    }
-  }
-  return moves;
-}
-
-function selectionSort(array) {
-  const moves = [];
-  do {
-    var swapped = false;
-    for (let i = 0; i < array.length - 1; i++) {
-      for (let j = i + 1; j < array.length; j++) {
-        if (array[j] < array[i]) {
-          swapped = true;
-          [array[j], array[i]] = [array[i], array[j]];
-          moves.push({
-            indices: [i, j],
-            swap: true,
-          });
-        } else {
-          moves.push({
-            indices: [j, i],
-            swap: false,
-          });
-        }
-      }
-    }
-  } while (swapped);
-  return moves;
-}
-
-function selectionSortBack(array) {
-  const moves = [];
-  do {
-    var swapped = false;
-    for (let i = array.length - 1; i >= 0; i--) {
-      for (let j = array.length; j >= i + 1; j--) {
-        if (array[j] < array[i]) {
-          swapped = true;
-          [array[j], array[i]] = [array[i], array[j]];
-          moves.push({
-            indices: [i, j],
-            swap: true,
-          });
-        } else {
-          moves.push({
-            indices: [j, i],
-            swap: false,
-          });
-        }
-      }
-    }
-  } while (swapped);
-  return moves;
-}
-
-// JavaScript program for Merge Sort
-
-// Merges two subarrays of arr[].
-// First subarray is arr[l..m]
-// Second subarray is arr[m+1..r]
-function merge(arr, l, m, r, moves) {
-  var n1 = m - l + 1;
-  var n2 = r - m;
-
-  // Create temp arrays
-  var L = new Array(n1);
-  var R = new Array(n2);
-
-  // Copy data to temp arrays L[] and R[]
-  for (var i = 0; i < n1; i++) L[i] = arr[l + i];
-  for (var j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
-
-  // Merge the temp arrays back into arr[l..r]
-
-  // Initial index of first subarray
-  var i = 0;
-
-  // Initial index of second subarray
-  var j = 0;
-
-  // Initial index of merged subarray
-  var k = l;
-
-  while (i < n1 && j < n2) {
-    if (L[i] <= R[j]) {
-      // swapped = true;
-      // moves.push({
-      //   indices: [i, j],
-      //   swap: true,
-      // });
-      arr[k] = L[i];
-      i++;
-    } else {
-      swapped = true;
-      moves.push({
-        indices: [i, j],
-        swap: true,
-      });
-      arr[k] = R[j];
-      j++;
-    }
-    k++;
-  }
-
-  // Copy the remaining elements of
-  // L[], if there are any
-  do {
-    swapped = false;
-
-    while (i < n1) {
-      console.log(L);
-      swapped = true;
-      moves.push({
-        indices: [i, j],
-        swap: true,
-      });
-      arr[k] = L[i];
-      i++;
-      k++;
-    }
-    swapped = false;
-  } while (swapped);
-
-  // Copy the remaining elements of
-  // R[], if there are any
-  do {
-    swapped = false;
-
-    while (j < n2) {
-      console.log(R);
-      swapped = true;
-      moves.push({
-        indices: [j, k],
-        swap: true,
-      });
-      arr[k] = R[j];
-      j++;
-      k++;
-    }
-    swapped = false;
-  } while (swapped);
-  return moves;
-}
-
-// l is for left index and r is
-// right index of the sub-array
-// of arr to be sorted */
-function mergeSort(arr, l, r) {
-  if (l >= r) {
-    return; //returns recursively
-  }
-  if (!moves) var moves = [];
-
-  let m = l + parseInt((r - l) / 2);
-  mergeSort(arr, l, m);
-  mergeSort(arr, m + 1, r);
-  merge(arr, l, m, r, moves);
-  return moves;
-}
 
 function animate() {
   context.clearRect(0, 0, myCanvas.width, myCanvas.height);

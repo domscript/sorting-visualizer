@@ -4,30 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Canvas Leaf</title>
+    <title>Sorting algorithm visualizer</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="math.js"></script>
-    <script defer src="column.js"></script>
-    <script defer src="sort.js"></script>
+    <script type="module" src="sort.js"></script>
   </head>
   <body>
-    <h1>Sorting Visualizator</h1>
+    <h1>Sorting algorithm visualizer</h1>
     <section class="grid-layout">
       <canvas id="myCanvas" height="1000" width="1000"></canvas>
       <section class="myButtons">
-        <button class="btn" type="button" onClick="playBubble()">
+        <button class="btn" type="button" data-sort="bubble">
           Bubble Sort
         </button>
-        <button class="btn" type="button" onClick="playBubbleBack()">
+        <button class="btn" type="button" data-sort="bubbleBack">
           Bubble Sort Back
         </button>
-        <button class="btn" type="button" onClick="playSelection()">
+        <button class="btn" type="button" data-sort="selection">
           Selection Sort
         </button>
-        <button class="btn" type="button" onClick="playSelectionBack()">
+        <button class="btn" type="button" data-sort="selectionBack">
           Selection Sort Back
         </button>
-        <button class="btn" type="button" onClick="playInsertion()">
+        <button class="btn" type="button" data-sort="insertion">
           Insertion Sort
         </button>
       </section>
