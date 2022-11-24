@@ -7,9 +7,27 @@ import { insertionSort } from "./algorithms/insertionSort.js";
 
 const myButtons = document.getElementsByClassName("myButtons")[0];
 
-myCanvas.width = 800;
-myCanvas.height = Math.min(myCanvas.width * 0.6, window.outerHeight * 0.9);
+const sizeW =
+  window.screen.width < 700
+    ? window.screen.width * 0.95
+    : window.screen.width * 0.8 || 300;
+const sizeH = Math.min(myCanvas.width * 0.6, window.outerHeight * 0.9);
+console.log(sizeW, sizeH);
 const context = myCanvas.getContext("2d");
+myCanvas.style.width = `${sizeW}px`;
+myCanvas.style.height = `${sizeH}px`;
+const scale = window.devicePixelRatio || 1;
+myCanvas.width = Math.floor(sizeW * scale);
+myCanvas.height = Math.floor(sizeH * scale);
+
+document.getElementById("speed").addEventListener("onchange", (e) => {
+  console.log(e);
+  console.log();
+});
+
+// Normalize coordinate system to use CSS pixels.
+// context.scale(scale, scale);
+
 const margin = 30;
 let amount;
 let speed;
